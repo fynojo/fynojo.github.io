@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSV File Validation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mt-5">CSV File Validation</h1>
+        {% if not_csv %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Validation Issues:</h4>
+                <p>Invalid file type. Please upload a CSV file.</p>
+            </div>
+        {% elif invalid_column %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Validation Issues:</h4>
+                <p>Invalid Column Name: '{{ invalid_column }}'</p>
+            </div>
+        {% elif issues %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Validation Issues:</h4>
+                <ul>
+                    {% for issue in issues %}
+                        <li>{{ issue }}</li>
+                    {% endfor %}
+                </ul>
+                <p>Total Issues: {{ total_issues }}</p>
+            </div>
+        {% else %}
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">File is valid!</h4>
+                <p>Your file meets all the requirements.</p>
+            </div>
+        {% endif %}
+        <a class="btn btn-primary mt-3" href="/">Back to Upload</a>
+    </div>
+</body>
+</html>
